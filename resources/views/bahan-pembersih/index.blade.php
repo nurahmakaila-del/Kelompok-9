@@ -34,7 +34,7 @@
                         </p>
                     </div>
 
-                    <a href="/bahan-pembersih/create" class="btn btn-primary">
+                    <a href="{{ route('bahan-pembersih.create') }}" class="btn btn-primary">
                         + Tambah Bahan
                     </a>
                 </div>
@@ -70,7 +70,6 @@
                             @forelse ($bahanPembersih as $index => $bahan)
 
                                 <tr>
-
                                     <td>
                                         {{ $index + 1 }}
                                     </td>
@@ -95,12 +94,18 @@
 
                                     <td>
 
+                                        <a
+                                            href="{{ route('bahan-pembersih.edit', $bahan->id) }}"
+                                            class="btn btn-sm btn-warning"
+                                        >
+                                            Edit
+                                        </a>
+
                                         <form
-                                            action="/bahan-pembersih/{{ $bahan->id }}"
+                                            action="{{ route('bahan-pembersih.destroy', $bahan->id) }}"
                                             method="POST"
                                             class="d-inline"
                                         >
-
                                             @csrf
                                             @method('DELETE')
 
@@ -111,11 +116,9 @@
                                             >
                                                 Hapus
                                             </button>
-
                                         </form>
 
                                     </td>
-
                                 </tr>
 
                             @empty
@@ -132,7 +135,7 @@
                                             </p>
 
                                             <a
-                                                href="/bahan-pembersih/create"
+                                                href="{{ route('bahan-pembersih.create') }}"
                                                 class="btn btn-primary"
                                             >
                                                 + Tambah Bahan

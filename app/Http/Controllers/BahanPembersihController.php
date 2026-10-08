@@ -34,6 +34,30 @@ class BahanPembersihController extends Controller
             ->with('success', 'Bahan pembersih berhasil ditambahkan.');
     }
 
+    public function edit($id)
+    {
+        $bahanPembersih = BahanPembersih::findOrFail($id);
+
+        return view('bahan-pembersih.edit', compact('bahanPembersih'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_bahan' => 'required',
+            'merek' => 'nullable',
+            'stok' => 'required|integer|min:0',
+            'satuan' => 'required',
+        ]);
+
+        $bahanPembersih = BahanPembersih::findOrFail($id);
+
+        $bahanPembersih->update($request->all());
+
+        return redirect('/bahan-pembersih')
+            ->with('success', 'Bahan pembersih berhasil diperbarui.');
+    }
+
     public function destroy($id)
     {
         BahanPembersih::findOrFail($id)->delete();
