@@ -1,58 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistem Operasional Laundry - Kelompok 9
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Tugas Pengembangan Aplikasi Website (BBK2DAB3), Studi Kasus 09.
+Dibuat dengan **PHP murni (native)** dan MySQL, tanpa framework.
 
-## About Laravel
+## Modul C: Data Pelanggan
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Pengelolaan biodata pelanggan, nomor telepon, dan catatan penanganan khusus pakaian.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Fitur:
+- Tabel data pelanggan
+- Tambah, ubah, dan hapus pelanggan (form)
+- Validasi: nama dan no. telepon wajib diisi, no. telepon tidak boleh kembar
+- RESTful API (JSON)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Anggota Kelompok
 
-## Learning Laravel
+| Modul | Nama |
+|---|---|
+| A - Layanan & Tarif | Aura Effel |
+| B - Mesin & Peralatan | Delsya Navy |
+| C - Data Pelanggan | Nurrahma Kaila Silva Gia |
+| D - Bahan Pembersih | Triyanti |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Kebutuhan
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.x
+- MySQL / MariaDB (XAMPP atau Laragon)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Cara Menjalankan
 
-## Agentic Development
+1. Nyalakan MySQL (XAMPP atau Laragon).
+2. Import `database.sql` lewat phpMyAdmin atau DBeaver.
+   Ini otomatis membuat database `Kelompok_9` dan tabel `pelanggans`.
+3. Sesuaikan koneksi di `config/koneksi.php` jika perlu
+   (default: host `127.0.0.1`, user `root`, password kosong).
+4. Jalankan server dari folder project:
+```
+   php -S localhost:8000
+```
+5. Buka `http://localhost:8000/pelanggan/index.php`.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Struktur Folder
 
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+Kelompok-9/
+├── api/
+│   └── pelanggan.php     # RESTful API
+├── config/
+│   └── koneksi.php       # koneksi database (PDO)
+├── pelanggan/
+│   ├── index.php         # daftar pelanggan
+│   ├── tambah.php        # form tambah
+│   ├── edit.php          # form ubah
+│   └── hapus.php         # hapus data
+└── database.sql          # struktur database
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## RESTful API
 
-## Contributing
+Base URL: `http://localhost:8000/api/pelanggan.php`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Method | URL | Fungsi |
+|---|---|---|
+| GET | `/api/pelanggan.php` | Semua pelanggan |
+| GET | `/api/pelanggan.php?id=1` | Satu pelanggan |
+| POST | `/api/pelanggan.php` | Tambah pelanggan |
+| PUT | `/api/pelanggan.php?id=1` | Ubah pelanggan |
+| DELETE | `/api/pelanggan.php?id=1` | Hapus pelanggan |
 
-## Code of Conduct
+Contoh body (JSON) untuk POST dan PUT:
+```json
+{
+  "nama": "Budi",
+  "alamat": "Bandung",
+  "no_telepon": "0811111111",
+  "catatan_khusus": "Pisahkan baju putih"
+}
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Kode respons: `200` sukses, `201` dibuat, `404` tidak ditemukan,
+`409` no. telepon sudah terdaftar, `422` data tidak lengkap.
