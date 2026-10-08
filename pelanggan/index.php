@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/../auth/session.php';
+wajib_login();
 require __DIR__ . '/../config/koneksi.php';
 $data = $pdo->query('SELECT * FROM pelanggans ORDER BY id DESC')->fetchAll();
 ?>

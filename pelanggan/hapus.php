@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/../auth/session.php';
+wajib_login();
 require __DIR__ . '/../config/koneksi.php';
 
 $id = (int)($_GET['id'] ?? 0);

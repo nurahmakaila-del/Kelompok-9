@@ -1,4 +1,6 @@
 <?php
+require __DIR__ . '/../auth/session.php';
+wajib_login_api();
 require __DIR__ . '/../config/koneksi.php';
 
 header('Content-Type: application/json; charset=utf-8');
