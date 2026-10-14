@@ -9,7 +9,7 @@ $data = $pdo->query('SELECT * FROM pelanggans ORDER BY id DESC')->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Data Pelanggan</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
 <div class="container py-4">
