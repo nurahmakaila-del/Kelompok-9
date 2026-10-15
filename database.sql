@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS Kelompok_9 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE Kelompok_9;
+
+CREATE TABLE IF NOT EXISTS pelanggans (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    alamat TEXT NULL,
+    no_telepon VARCHAR(20) NOT NULL UNIQUE,
+    catatan_khusus TEXT NULL,
+    created_at TIMESTAMP NULL DEFAULT NULL,
+    updated_at TIMESTAMP NULL DEFAULT NULL
+);
